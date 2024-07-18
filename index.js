@@ -14,8 +14,9 @@ app.use(express.json())
 app.use(express.static("dist"))
 // app.use(express.static("public"))
 app.use(cors({
-    // origin: "https://institute-management-oa5o.onrender.com",
-    origin: "http://localhost:5173",
+    origin: process.env.NODE_ENV === "development"
+    ?process.env.LIVE_SERVER
+    :"http://localhost:5173",
     credentials:true
 }))
 app.use(cookieparser())
