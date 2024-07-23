@@ -13,17 +13,21 @@ const app = express()
 app.use(express.json())
 app.use(express.static("dist"))
 // app.use(express.static("public"))
+// app.use(cors({
+//     origin: process.env.NODE_ENV === "development"
+//     ?process.env.LIVE_SERVER
+//     :"http://localhost:5173",
+//     credentials:true
+// }))
 app.use(cors({
-    origin: process.env.NODE_ENV === "development"
-    ?process.env.LIVE_SERVER
-    :"http://localhost:5173",
+    origin:"http://localhost:5173",
     credentials:true
 }))
 app.use(cookieparser())
 
 
 // app.use("/api/skillhub/student", require("./routes/user.routes"))
-// app.use("/api/skillhub/auth", require("./routes/admin.auth.route"))
+app.use("/api/auth", require("./routers/auth.routes"))
 // app.use("/api/skillhub",adminProtected, require("./routes/admin.routes"))
 
 app.use("*", (req, res)=> {
