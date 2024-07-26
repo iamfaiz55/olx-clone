@@ -8,4 +8,8 @@ router
       .post("/login-admin", authController.loginAdmin )
       .post("/verify-otp", authController.verifyOTP )
 
+      .post("/register-admin", authController.registerUser )
+      .post("/login-user", authController.loginUser )
+      .post("/verify-otp-user", authController.verifyOTPUser )
+
 module.exports = router
