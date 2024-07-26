@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken")
 const Admin = require("../models/Admin")
 
 const sendEmail = require("../utils/email")
+const User = require("../models/User")
 
 exports.registerAdmin =asyncHandler(async(req, res)=> {
     const {name, email, password}= req.body
@@ -135,7 +136,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: "All Fields Required", error });
     }
 
-    const user = await Admin.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
         return res.status(400).json({ message: "Invalid Credential - Email Not Found" });
     }
@@ -166,7 +167,7 @@ exports.verifyOTPUser = asyncHandler(async (req, res) => {
         return res.status(400).json({ message: "All Fields Required", error });
     }
 
-    const result = await Admin.findOne({ email });
+    const result = await User.findOne({ email });
 
     if (!result) {
         return res.status(400).json({ message: "Admin not found with this email" });
