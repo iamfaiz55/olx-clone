@@ -144,17 +144,9 @@ exports.loginUser = asyncHandler(async (req, res) => {
         return res.status(401).json({ message: "Password Does Not Match" });
     }
 
-    const otp = Math.floor(100000 + Math.random() * 900000); // Generate 6-digit OTP
-
-    await sendEmail({
-        to: email,
-        subject: 'Login OTP',
-        message: `<h1>Do Not Share Your Account OTP</h1><p>Your Login OTP is ${otp}</p>`
-    });
-
     await Admin.findByIdAndUpdate(user._id, { otp });
 
-    res.status(200).json({ message: "OTP sent successfully", result: email });
+    res.status(200).json({ message: "User Login successfully", result:user });
 });
 
 exports.verifyOTPUser = asyncHandler(async (req, res) => {
