@@ -113,10 +113,8 @@ exports.registerUser =asyncHandler(async(req, res)=> {
      if(!validator.isEmail(email)){
           return res.status(400).json({message:"invalid Email"})
         }
-        //  if(!validator.isStrongPassword(password)){
-            //       return res.status(400).json({message:"Provide Strong Password"})
-            //   }
-     const isFound = await Admin.findOne({email})
+
+     const isFound = await User.findOne({email})
      if(isFound){
          return res.status(400).json({message:"Email Already Registered With Us "})
 
