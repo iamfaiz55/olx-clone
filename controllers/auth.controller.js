@@ -144,7 +144,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
         return res.status(401).json({ message: "Password Does Not Match" });
     }
 
-    await Admin.findByIdAndUpdate(user._id, { otp });
+    // await Admin.findByIdAndUpdate(user._id, { otp });
 
     res.status(200).json({ message: "User Login successfully", result:user });
 });
