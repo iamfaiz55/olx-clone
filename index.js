@@ -28,7 +28,7 @@ app.use(cookieparser())
 
 // app.use("/api/skillhub/student", require("./routes/user.routes"))
 app.use("/api/auth", require("./routes/auth.routes"))
-app.use("/api/user", require("./routes/user.routes"))
+app.use("/api/user", require("./routes/user.route"))
 // app.use("/api/skillhub",adminProtected, require("./routes/admin.routes"))
 
 app.use("*", (req, res)=> {
