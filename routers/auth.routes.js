@@ -10,6 +10,7 @@ router
 
       .post("/register-mobile-user", authController.registerUser )
       .post("/login-mobile-user", authController.loginUser )
-      .post("/verify-mobile-otp", authController.verifyOTPUser )
+      .post("/verify-user-email-otp", authController.verifyOTPUser )
+      .post("/logout-mobile-user", authController.logoutUser )
 
 module.exports = router
