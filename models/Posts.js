@@ -30,6 +30,10 @@ const postSchema = new mongoose.Schema({
     required:true,
     ref:"user"
    },
+   // gps:{
+   //    type:Boolean,
+   //    default:false
+   // }
 },{timestamps:true})
 
 module.exports = mongoose.model("posts", postSchema)
