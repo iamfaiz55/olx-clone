@@ -73,18 +73,33 @@ exports.verifyMobileOTP = asyncHandler(async (req, res) => {
     })
 
 })
+
+
+exports.getLocation = asyncHandler(async(req, res)=> {
+    const {gps} = req.body
+    const {isError, error}= checkEmpty({gps})
+
+ if (isError) {
+        return res.status(400).json({ message: "All Fields Required", error })
+    }
+
+    const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${gps.latitude}%2C${gps.longitude}&key=${process.env.OPEN_CAGE_API_KEY}`);
+    const result = await response.json();
+
+    // const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?key=${process.env.OPEN_CAGE_API_KEY}&q=${gps.latitude}+${gps.longitude}&pretty=1&no_annotations=1`);
+    // const result = await response.json();
+    // console.log(result);
+
+    res.json({message:"Location FEtch Success",   result:result.results[0].formatted})
+
+})
 exports.addPost = asyncHandler(async (req, res) => {
     const { title, desc, price, images, location, category, gps } = req.body
     const { error, isError } = checkEmpty({ title, desc, price, images, location, category })
     if (isError) {
         return res.status(400).json({ message: "All Fields Required", error })
     }
-    if(gps){
-        // api call to openCageData
-        const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?key=${process.env.OPEN_CAGE_API_KEY}&q=${location.latitude}+${location.longitude}&pretty=1&no_annotations=1`);
-        const result = await response.json();
-        console.log(result);
-    }
+    
     // 👇 modify this code to support cloudnary
 
     await Posts.create({ title, desc, price, images, location, category, user: req.loggedInUser })
