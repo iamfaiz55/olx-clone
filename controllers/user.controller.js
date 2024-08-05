@@ -99,8 +99,8 @@ exports.addPost = asyncHandler(async (req, res) => {
 
     upload(req, res, async err => {
 
-        const { title, desc, price, images, location, category, gps } = req.body
-        const { error, isError } = checkEmpty({ title, desc, price, images, location, category })
+        const { title, desc, price, location, category} = req.body
+        const { error, isError } = checkEmpty({ title, desc, price,  location, category })
         if (isError) {
             return res.status(400).json({ message: "All Fields Required", error })
         }
