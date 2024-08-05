@@ -104,13 +104,16 @@ exports.addPost = asyncHandler(async (req, res) => {
         if (isError) {
             return res.status(400).json({ message: "All Fields Required", error })
         }
-        
+        const arr = [];
+        for (const item of req.files) {
+          arr.push(item.filename);
+        }
 
         console.log(req.files);
         
         // 👇 modify this code to support cloudnary
         
-        // await Posts.create({ title, desc, price, images, location, category, user: req.loggedInUser })
+        await Posts.create({ title, desc, price, images: arr, location, category, user: req.loggedInUser })
         res.json({ message: "post create success" })
     })
 
