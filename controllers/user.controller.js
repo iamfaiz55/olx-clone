@@ -5,6 +5,7 @@ const { sendSMS } = require("../utils/sms")
 const { checkEmpty } = require("../utils/checkEmpty")
 const Posts = require("../models/Posts")
 const upload = require("../utils/upload")
+const cloudinary = require("../utils/cloudinary.config")
 exports.verifyUserEmail = asyncHandler(async (req, res) => {
     console.log(req.loggedInUser)
     const result = await User.findById(req.loggedInUser)
@@ -106,10 +107,11 @@ exports.addPost = asyncHandler(async (req, res) => {
         }
         const arr = [];
         for (const item of req.files) {
-          arr.push(item.filename);
+           const {secure_url}= await cloudinary.uploader.upload(item.path)
+           arr.push(secure_url)
         }
 
-        console.log(req.files);
+        // console.log(req.files);
         
         // 👇 modify this code to support cloudnary
         
