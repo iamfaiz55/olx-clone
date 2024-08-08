@@ -120,3 +120,8 @@ exports.addPost = asyncHandler(async (req, res) => {
     })
 
 })
+
+exports.getAllPost = asyncHandler(async(req, res)=> {
+    const result = await Posts.find()
+    res.json({message:"All Posts Fetch Success", result})
+})

@@ -11,6 +11,7 @@ router
 
     .post("/get-location", userProtected, userController.getLocation)
     .post("/add-post", userProtected, userController.addPost)
+    .get("/posts", userProtected, userController.getAllPost)
 
 
 
